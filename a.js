@@ -98,60 +98,45 @@ function aktipesan4() {
 
 var slov = 0;
 
-document.getElementById("lv1").addEventListener("touchstart", function() {
-  lv1.style.opacity = "0";
+function handleInteraction(element) {
+  element.style.opacity = "0";
   slov += 1;
-  this.removeEventListener("touchstart", arguments.callee);
+  element.removeEventListener("touchstart", handleInteraction);
+  element.removeEventListener("click", handleInteraction);
   checkslov();
+}
+
+document.getElementById("lv1").addEventListener("touchstart", function() {
+  handleInteraction(this);
 });
 
 document.getElementById("lv1").addEventListener("click", function() {
-  lv1.style.opacity = "0";
-  slov += 1;
-  this.removeEventListener("click", arguments.callee);
-  checkslov();
+  handleInteraction(this);
 });
 
 document.getElementById("lv2").addEventListener("touchstart", function() {
-  lv2.style.opacity = "0";
-  slov += 1;
-  this.removeEventListener("touchstart", arguments.callee);
-  checkslov();
+  handleInteraction(this);
 });
 
 document.getElementById("lv2").addEventListener("click", function() {
-  lv2.style.opacity = "0";
-  slov += 1;
-  this.removeEventListener("click", arguments.callee);
-  checkslov();
+  handleInteraction(this);
 });
 
 document.getElementById("lv3").addEventListener("touchstart", function() {
-  lv3.style.opacity = "0";
-  slov += 1;
-  this.removeEventListener("touchstart", arguments.callee);
-  checkslov();
+  handleInteraction(this);
 });
 
 document.getElementById("lv3").addEventListener("click", function() {
-  lv3.style.opacity = "0";
-  slov += 1;
-  this.removeEventListener("click", arguments.callee);
-  checkslov();
+  handleInteraction(this);
 });
 
 document.getElementById("lv4").addEventListener("touchstart", function() {
-  lv4.style.opacity = "0";
-  slov += 1;
-  this.removeEventListener("touchstart", arguments.callee);
-  checkslov();
+  handleInteraction(this);
 });
 
 document.getElementById("lv4").addEventListener("click", function() {
-  lv4.style.opacity = "0";
-  slov += 1;
-  this.removeEventListener("click", arguments.callee);
-  checkslov();
+  handleInteraction(this);
 });
+
 
 function checkslov() { if (slov == 4) { kolombaru.style = "position:relative;transform:scale(1)"; fthilang(); ftganti = 1; setTimeout(ftmuncul, 300); otomatis(); setTimeout(aktipesan2, 400); } }
