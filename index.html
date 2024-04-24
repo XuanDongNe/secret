@@ -91,12 +91,12 @@
     if (nama) {
        var temp = nama.toLowerCase(); 
         
-        if (temp === 'lưu vy' || temp === 'thanh vy' || temp === 'lưu thanh vy' || temp === 'vy') {
+        if (temp === 'lưu vy' || temp === 'thanh vy' || temp === 'lưu thanh vy' || temp === 'vy' || temp === 'vy lưu') {
             window.nama = nama;
             vketikhalo = "Hi, " + nama + " 💑";
             mulainama();
         } else {
-            await swals.fire('Không phải tên người đẹp anh gửi !');
+            await swals.fire('Không phải tên người đẹp anh gửi ! Phải viết có dấu đóo');
             inipesan();
         }
     } else {
