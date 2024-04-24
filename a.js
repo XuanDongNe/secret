@@ -62,47 +62,41 @@ function aktipesan2() {
     },
   }).go();
 }
-vketik4 = pesan4.innerHTML; pesan4.innerHTML = "";
-function aktipesan4() {
-  wallpaper.style = "transform: scale(1);";
-  fthilang(); ftganti = 2; setTimeout(ftmuncul, 300);
-  new TypeIt("#pesan4", {
-    strings: ["" + vketik4], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
-    afterComplete: function () {
-      pesan4.innerHTML = vketik4; setTimeout(aktipesan5, 700);
-    },
-  }).go();
-}
-vketik5 = pesan5.innerHTML; pesan5.innerHTML = "";
-function aktipesan5() {
-  wallpaper.style = "transform: scale(1.5);";
-  fthilang(); ftganti = 3; setTimeout(ftmuncul, 300);
-  new TypeIt("#pesan5", {
-    strings: ["" + vketik5], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
-    afterComplete: function () {
-      pesan5.innerHTML = vketik5 + " ><"; setTimeout(aktipesan6, 700);
-    },
-  }).go();
-}
-vketik6 = pesan6.innerHTML; pesan6.innerHTML = "";
-function aktipesan6() {
-  wallpaper.style = "transform: scale(1);";
-  fthilang(); ftganti = 4; setTimeout(ftmuncul, 300);
-  new TypeIt("#pesan6", {
-    strings: ["" + vketik6], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
-    afterComplete: function () {
-      pesan6.innerHTML = vketik6; setTimeout(tombol, 400);
-    },
-  }).go();
-}
+// vketik4 = pesan4.innerHTML; pesan4.innerHTML = "";
+// function aktipesan4() {
+//   wallpaper.style = "transform: scale(1);";
+//   fthilang(); ftganti = 2; setTimeout(ftmuncul, 300);
+//   new TypeIt("#pesan4", {
+//     strings: ["" + vketik4], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
+//     afterComplete: function () {
+//       pesan4.innerHTML = vketik4; setTimeout(aktipesan5, 700);
+//     },
+//   }).go();
+// }
+// vketik5 = pesan5.innerHTML; pesan5.innerHTML = "";
+// function aktipesan5() {
+//   wallpaper.style = "transform: scale(1.5);";
+//   fthilang(); ftganti = 3; setTimeout(ftmuncul, 300);
+//   new TypeIt("#pesan5", {
+//     strings: ["" + vketik5], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
+//     afterComplete: function () {
+//       pesan5.innerHTML = vketik5 + " ><"; setTimeout(aktipesan6, 700);
+//     },
+//   }).go();
+// }
+// vketik6 = pesan6.innerHTML; pesan6.innerHTML = "";
+// function aktipesan6() {
+//   wallpaper.style = "transform: scale(1);";
+//   fthilang(); ftganti = 4; setTimeout(ftmuncul, 300);
+//   new TypeIt("#pesan6", {
+//     strings: ["" + vketik6], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
+//     afterComplete: function () {
+//       pesan6.innerHTML = vketik6; setTimeout(tombol, 400);
+//     },
+//   }).go();
+// }
 
 var slov = 0;
-// document.getElementById("lv1").onclick = function () { lv1.style = "opacity:0"; slov += 1; this.onclick = null; checkslov(); }
-// document.getElementById("lv2").onclick = function () { lv2.style = "opacity:0"; slov += 1; this.onclick = null; checkslov(); }
-// document.getElementById("lv3").onclick = function () { lv3.style = "opacity:0"; slov += 1; this.onclick = null; checkslov(); }
-// document.getElementById("lv4").onclick = function () { lv4.style = "opacity:0"; slov += 1; this.onclick = null; checkslov(); }
-
-
 
 document.getElementById("lv1").addEventListener("touchstart", function() {
   lv1.style.opacity = "0";
