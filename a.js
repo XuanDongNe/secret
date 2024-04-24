@@ -22,7 +22,7 @@ function kethalo() { new TypeIt("#halo", { strings: ["" + vketikhalo], startDela
 
 function tombol() { wallpaper.style = "transform: scale(1);"; Tombol.style = "opacity:1;transform: scale(1);"; fungsi = 1 }
 document.getElementById("By").onclick = function () { if (fungsi == 1) { pertanyaan(); } if (fungsi == 2) { menuju(); } }
-async function menuju() { await swals.fire('Uci!', 'Nhớ liên hệ anhh nhaaa bấy biii , anhh có này tặng choo bbi nàa!', 'success'); window.location = "https://cuongnobro.github.io/Baby/"; }
+async function menuju() { await swals.fire('Uci!', 'Nhớ liên hệ anhh nhaaa !!', 'success'); window.location = "https://m.me/xuanndongg"; }
 
 vketik1 = kalimat.innerHTML; kalimat.innerHTML = "";
 function mulaiketik1() {
@@ -58,21 +58,21 @@ function aktipesan2() {
   new TypeIt("#kalimat", {
     strings: ["" + vketik2, "" + vketik3], startDelay: 20, speed: 30, cursor: true, deleteSpeed: 30, breakLines: false, waitUntilVisible: true, lifelike: true,
     afterComplete: function () {
-      kalimat.innerHTML = vketik3; setTimeout(aktipesan4, 700);
+      kalimat.innerHTML = vketik3; setTimeout(aktipesan4, 1000);
     },
   }).go();
 }
-// vketik4 = pesan4.innerHTML; pesan4.innerHTML = "";
-// function aktipesan4() {
-//   wallpaper.style = "transform: scale(1);";
-//   fthilang(); ftganti = 2; setTimeout(ftmuncul, 300);
-//   new TypeIt("#pesan4", {
-//     strings: ["" + vketik4], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
-//     afterComplete: function () {
-//       pesan4.innerHTML = vketik4; setTimeout(aktipesan5, 700);
-//     },
-//   }).go();
-// }
+vketik4 = pesan4.innerHTML; pesan4.innerHTML = "";
+function aktipesan4() {
+  wallpaper.style = "transform: scale(1);";
+  fthilang(); ftganti = 2; setTimeout(ftmuncul, 300);
+  new TypeIt("#pesan4", {
+    strings: ["" + vketik4], startDelay: 1, speed: 52, cursor: true, waitUntilVisible: true, lifelike: true,
+    afterComplete: function () {
+      pesan4.innerHTML = vketik4; setTimeout(tombol, 400);
+    },
+  }).go();
+}
 // vketik5 = pesan5.innerHTML; pesan5.innerHTML = "";
 // function aktipesan5() {
 //   wallpaper.style = "transform: scale(1.5);";
