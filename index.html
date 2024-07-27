@@ -84,7 +84,7 @@
   
   async function inipesan() {
     var { value: nama } = await swals.fire({
-        title: 'Tên của em là gì?', 
+        title: 'Nhập tên ins đi?', 
         input: 'text',
     });
     
@@ -96,7 +96,7 @@
             vketikhalo = "Hi, " + "Ngoc An" + " 💑";
             mulainama();
         } else {
-            await swals.fire('Không phải tên người đẹp anh gửi ! Phải viết có dấu đóo');
+            await swals.fire('Không phải tên ins người đẹp anh gửi !');
             inipesan();
         }
     } else {
