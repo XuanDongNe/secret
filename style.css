@@ -48,6 +48,15 @@
     #Content > *{display:flex;align-items:center;text-align:center;justify-content:center;margin-top:1px;}
     .kumpulanstiker > img{display:none;background: rgba(255, 255, 255, 0.2);box-shadow: 0 4px 30px rgba(255,255,255, 0.3);backdrop-filter: blur(5px);-webkit-backdrop-filter: blur(5px);border: 1px solid rgba(255, 255, 255, 0.3);border-radius: 50%;padding:10px;width:100px;height:100px;margin:20px 0;}
     #fotostiker{opacity:.1;transition:all 1.2s ease;transform: scale(.1);}
+    
+    /* Ensure emoji stickers work with existing CSS */
+    .kumpulanstiker > .emoji-sticker {
+        display: none;
+    }
+    
+    .kumpulanstiker > .emoji-sticker.show {
+        display: inline-flex !important;
+    }
     .halo{font-size:18px !important;position:relative;margin:15px 0 20px 0} 
     .halo.sty2{font-family:var(--gaya-font2);font-size:24px !important;margin-top:20px !important;}
     .halo.sty3{position:absolute !important;font-size:14px !important;font-weight:400 !important;margin:30px 20px !important;}
@@ -78,6 +87,237 @@
     .swal2-modal{background:#EAEAEA;box-shadow: 0 4px 30px rgba(255,255,255, 0.3);backdrop-filter: blur(2px);-webkit-backdrop-filter: blur(2px);border: 1px solid rgba(255, 255, 255, 0.3);border-radius: 8px;max-width:330px;top:-60px;}
     .swal2-styled.swal2-confirm, .swal2-styled.swal2-cancel{position: relative;background-color: #4839eb;color: #fff;border-radius:18px;z-index: 1;transition: all 0.2s;}
     
-    .fa-snowflake {opacity:.3;color:white;font-size: 20px;position: absolute;animation:  heartMove linear 1;top: -10vh;z-index: 0;}
-    @keyframes heartMove {0%{transform: translateY(-10vh) ;} 100%{transform: translateY(100vh) ;}}
-    .sembunyi, #pesanditolak > *, #kado2, #kado3{display:none !important}
+.fa-snowflake {opacity:.3;color:white;font-size: 20px;position: absolute;animation:  heartMove linear 1;top: -10vh;z-index: 0;}
+@keyframes heartMove {0%{transform: translateY(-10vh) ;} 100%{transform: translateY(100vh) ;}}
+
+/* Enhanced CSS for surprise effects */
+/* Smooth transitions for all elements */
+* {
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Enhanced glow effect */
+.glow {
+    position: relative;
+    overflow: visible;
+    animation: glowPulse 2s infinite alternate;
+}
+
+@keyframes glowPulse {
+    from { box-shadow: 0 0 20px rgba(255,182,193,0.8); }
+    to { box-shadow: 0 0 30px rgba(255,20,147,1); }
+}
+
+/* Enhanced floating animation */
+.floating {
+    animation: enhancedFloat 4s ease-in-out infinite;
+    transform-origin: center;
+}
+
+@keyframes enhancedFloat {
+    0%, 100% { 
+        transform: translateY(0px) rotate(0deg);
+    }
+    25% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+    50% { 
+        transform: translateY(-10px) rotate(0deg);
+    }
+    75% {
+        transform: translateY(-5px) rotate(-2deg);
+    }
+}
+
+/* Love hearts special effects */
+#kolombaru li {
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    cursor: pointer;
+    transform-origin: center;
+}
+
+#kolombaru li:hover {
+    transform: scale(1.3) rotate(15deg);
+    filter: drop-shadow(0 0 10px rgba(255, 20, 147, 0.8));
+}
+
+#kolombaru li::before {
+    content: '✨';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%) scale(0);
+    transition: transform 0.3s ease;
+    pointer-events: none;
+}
+
+#kolombaru li:hover::before {
+    transform: translateX(-50%) scale(1);
+}
+
+/* Enhanced button effects */
+#By {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    background-size: 200% 200%;
+    animation: gradientShift 3s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#By::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+#By:hover::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* Sticker enhancements */
+.kumpulanstiker > img {
+    filter: drop-shadow(0 5px 15px rgba(255, 105, 180, 0.5));
+    transition: all 0.3s ease;
+}
+
+.kumpulanstiker > img:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 25px rgba(255, 105, 180, 0.8));
+}
+
+/* Emoji stickers */
+.emoji-sticker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 30px rgba(255,255,255, 0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    padding: 20px;
+    width: 100px;
+    height: 100px;
+    margin: 20px 0;
+    font-size: 50px;
+    cursor: pointer;
+    filter: drop-shadow(0 5px 15px rgba(255, 105, 180, 0.5));
+    transition: all 0.3s ease;
+    animation: emojiPulse 3s ease-in-out infinite;
+}
+
+.emoji-sticker:hover {
+    transform: scale(1.1) rotate(5deg);
+    filter: drop-shadow(0 8px 25px rgba(255, 105, 180, 0.8));
+    box-shadow: 0 0 30px rgba(255, 105, 180, 0.6);
+}
+
+@keyframes emojiPulse {
+    0%, 100% { 
+        transform: scale(1);
+        filter: hue-rotate(0deg);
+    }
+    50% { 
+        transform: scale(1.05);
+        filter: hue-rotate(15deg);
+    }
+}
+
+/* Gift box enhancement */
+#kadoIn {
+    position: relative;
+}
+
+#kadoIn::before {
+    content: '🎁';
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 2em;
+    animation: bounce 2s infinite;
+    opacity: 0.8;
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateX(-50%) translateY(0);
+    }
+    40% {
+        transform: translateX(-50%) translateY(-20px);
+    }
+    60% {
+        transform: translateX(-50%) translateY(-10px);
+    }
+}
+
+/* Text effects */
+#ket {
+    text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.6);
+    animation: textGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes textGlow {
+    from {
+        text-shadow: 2px 2px 4px rgba(255, 105, 180, 0.6);
+    }
+    to {
+        text-shadow: 0 0 20px rgba(255, 105, 180, 0.9);
+    }
+}
+
+/* Surprise elements */
+.surprise-element {
+    position: fixed;
+    z-index: 1000;
+    pointer-events: none;
+    animation: surpriseFloat 3s ease-in-out forwards;
+}
+
+@keyframes surpriseFloat {
+    0% {
+        opacity: 0;
+        transform: scale(0) rotate(0deg);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.2) rotate(180deg);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(0.8) rotate(360deg);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .floating {
+        animation-duration: 3s;
+    }
+    
+    .glow {
+        filter: drop-shadow(0 0 10px rgba(255, 105, 180, 0.8));
+    }
+    
+    .cursor {
+        display: none;
+    }
+}
+
+.sembunyi, #pesanditolak > *, #kado2, #kado3{display:none !important}

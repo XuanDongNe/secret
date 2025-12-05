@@ -13,6 +13,286 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.all.min.js"></script>
 <link href="https://feeldreams.github.io/heibuka/style.css" rel="stylesheet" type="text/css" />
 <script src="https://unpkg.com/typeit@8.7.0/dist/index.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+  /* Cursor glow effect */
+  body {
+    cursor: none;
+  }
+
+  .cursor {
+    position: fixed;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 182, 193, 0.8) 0%, rgba(255, 20, 147, 0.4) 50%, transparent 100%);
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: screen;
+    animation: pulse 1.5s infinite;
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(1.5);
+    }
+  }
+
+  /* Particles */
+  .particle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 100;
+    border-radius: 50%;
+    animation: float 6s linear infinite;
+  }
+
+  @keyframes float {
+    0% {
+      opacity: 1;
+      transform: translateY(100vh) rotate(0deg);
+    }
+
+    100% {
+      opacity: 0;
+      transform: translateY(-10vh) rotate(360deg);
+    }
+  }
+
+  /* Falling hearts */
+  .heart {
+    position: fixed;
+    color: #ff69b4;
+    font-size: 20px;
+    animation: fall 4s linear infinite;
+    pointer-events: none;
+    z-index: 50;
+  }
+
+  @keyframes fall {
+    0% {
+      transform: translateY(-100px) rotate(0deg);
+      opacity: 1;
+    }
+
+    100% {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+
+  /* Shake animation */
+  .shake {
+    animation: shake 0.5s;
+  }
+
+  @keyframes shake {
+
+    0%,
+    20%,
+    40%,
+    60%,
+    80%,
+    100% {
+      transform: translateX(0);
+    }
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-10px);
+    }
+  }
+
+  /* Glow effect for important elements */
+  .glow {
+    box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+    animation: glow 2s infinite alternate;
+  }
+
+  @keyframes glow {
+    from {
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.8);
+    }
+
+    to {
+      box-shadow: 0 0 30px rgba(255, 20, 147, 1);
+    }
+  }
+
+  /* Music controls */
+  .music-controls {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 10px 15px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .music-btn {
+    background: none;
+    border: none;
+    color: #ff69b4;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .music-btn:hover {
+    transform: scale(1.2);
+  }
+
+  /* Surprise popup */
+  .surprise-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(45deg, #ff69b4, #ff1493);
+    color: white;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+    z-index: 2000;
+    transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    box-shadow: 0 20px 40px rgba(255, 105, 180, 0.5);
+  }
+
+  .surprise-popup.show {
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  .countdown {
+    font-size: 2em;
+    font-weight: bold;
+    margin: 10px 0;
+  }
+
+  /* Floating elements */
+  .floating {
+    animation: floating 3s ease-in-out infinite;
+  }
+
+  @keyframes floating {
+
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+
+    50% {
+      transform: translateY(-20px);
+    }
+  }
+
+  /* SweetAlert animations */
+  .animate__animated {
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+  }
+
+  .animate__bounceIn {
+    animation-name: bounceIn;
+  }
+
+  .animate__headShake {
+    animation-name: headShake;
+    animation-duration: 0.8s;
+  }
+
+  .animate__fadeOut {
+    animation-name: fadeOut;
+  }
+
+  @keyframes bounceIn {
+
+    from,
+    20%,
+    40%,
+    60%,
+    80%,
+    to {
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    0% {
+      opacity: 0;
+      transform: scale3d(0.3, 0.3, 0.3);
+    }
+
+    20% {
+      transform: scale3d(1.1, 1.1, 1.1);
+    }
+
+    40% {
+      transform: scale3d(0.9, 0.9, 0.9);
+    }
+
+    60% {
+      opacity: 1;
+      transform: scale3d(1.03, 1.03, 1.03);
+    }
+
+    80% {
+      transform: scale3d(0.97, 0.97, 0.97);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+  @keyframes headShake {
+    0% {
+      transform: translateX(0);
+    }
+
+    6.5% {
+      transform: translateX(-6px) rotateY(-9deg);
+    }
+
+    18.5% {
+      transform: translateX(5px) rotateY(7deg);
+    }
+
+    31.5% {
+      transform: translateX(-3px) rotateY(-5deg);
+    }
+
+    43.5% {
+      transform: translateX(2px) rotateY(3deg);
+    }
+
+    50% {
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0;
+    }
+  }
+</style>
 
 <head>
   <title>Secret</title>
@@ -21,7 +301,21 @@
 </head>
 
 <body>
+  <!-- Custom cursor -->
+  <div class="cursor"></div>
 
+  <!-- Music controls -->
+  <div class="music-controls">
+    <button class="music-btn" id="playPauseBtn">🎵</button>
+    <button class="music-btn" id="volumeBtn">🔊</button>
+  </div>
+
+  <!-- Surprise popup -->
+  <div class="surprise-popup" id="surprisePopup">
+    <h3>🎉 SURPRISE! 🎉</h3>
+    <div class="countdown" id="countdown">3</div>
+    <p>Có điều bất ngờ đang chờ em...</p>
+  </div>
 
   <audio src="./sound/Keshi - limbo.mp3" id="linkmp3" class="sembunyi"></audio>
 
@@ -34,20 +328,22 @@
 
   <div id='Content'>
 
-    <div id="kadoIn">
-      <!-- Tombol Surat --><img src="https://feeldreams.github.io/kadoin.png" />
+    <div id="kadoIn" class="glow">
+      <!-- Tombol Surat --><img src="https://feeldreams.github.io/kadoin.png" class="floating" />
     </div>
-    <p id="ket">Mở quà đii em :3</p>
+    <p id="ket" class="floating">Mở quà đii em :3</p>
 
     <div class="kumpulanstiker">
       <!-- Stiker untuk Konten -->
-      <img src="https://feeldreams.github.io/peach6.gif" id="fotostiker" />
-      <img src="https://feeldreams.github.io/bunga.gif" id="fotostiker1" />
-      <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker2" />
-      <img src="https://feeldreams.github.io/gumush.gif" id="fotostiker3" />
-      <img src="https://feeldreams.github.io/emawh.gif" id="fotostiker4" />
-
-      <img src="https://feeldreams.github.io/pandacoklat.gif" id="fotostiker5" />
+      <div id="fotostiker" class="floating emoji-sticker">🍑</div>
+      <div id="fotostiker1" class="floating emoji-sticker">🌸</div>
+      <div id="fotostiker2" class="floating emoji-sticker">🐼</div>
+      <div id="fotostiker3" class="floating emoji-sticker">✨</div>
+      <div id="fotostiker4" class="floating emoji-sticker">💖</div>
+      <div id="fotostiker5" class="floating emoji-sticker">🐻</div>
+      <div id="fotostiker6" class="floating emoji-sticker" style="display:none;">🎀</div>
+      <div id="fotostiker7" class="floating emoji-sticker" style="display:none;">🌺</div>
+      <div id="fotostiker8" class="floating emoji-sticker" style="display:none;">🦄</div>
     </div>
 
     <p id="halo" class="halo"></p>
@@ -59,10 +355,10 @@
         <!-- Pesan -->
         <p id="pesan1">Chạm đủ 4 love nhoo ❤️</p>
         <div id="kolombaru">
-          <li id="lv1"> ❤️</li>
-          <li id="lv2"> ❤️</li>
-          <li id="lv3"> ❤️</li>
-          <li id="lv4"> ❤️</li>
+          <li id="lv1" class="floating glow"> ❤️</li>
+          <li id="lv2" class="floating glow"> ❤️</li>
+          <li id="lv3" class="floating glow"> ❤️</li>
+          <li id="lv4" class="floating glow"> ❤️</li>
         </div>
 
         <p id="pesan2">Tuỵt zờiiiii! 💘</p>
@@ -75,7 +371,7 @@
     </div>
 
     <!-- Tombol Kirim Pesan -->
-    <div id="Tombol"><a id="By">&#128140; Click</a></div>
+    <div id="Tombol" class="glow"><a id="By" class="floating">&#128140; Click</a></div>
 
     <!-- Pesan Ditolak -->
     <div id="pesanditolak">
@@ -86,25 +382,250 @@
   </div>
 
   <script>
-    const body = document.querySelector("body"); const swalst = Swal.mixin({ timer: 2300, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 90, }); audio = new Audio('' + linkmp3.src); ftganti = 0; fungsi = 0; fungsiAwal = 0; deffotostiker = fotostiker.src; Content.style = "opacity:1;margin-top:16vh"; const swals = Swal.mixin({ allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80, });
+    // Rejection counter for cycling messages
+    let rejectionCount = 0;
 
-    document.getElementById("kadoIn").onclick = function () { if (fungsiAwal == 0) { audio.play(); fungsiAwal = 1; kadoIn.style = "transition:all .8s ease;transform:scale(10);opacity:0"; wallpaper.style = "transform: scale(1.5);"; ket.style = "display:none"; setTimeout(initengahan, 300); setTimeout(inipesan, 500) } }
+    // Custom cursor effect
+    const cursor = document.querySelector('.cursor');
+    document.addEventListener('mousemove', (e) => {
+      cursor.style.left = e.clientX + 'px';
+      cursor.style.top = e.clientY + 'px';
+    });
+
+    // Create particles
+    function createParticle() {
+      const particle = document.createElement('div');
+      particle.className = 'particle';
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.width = particle.style.height = Math.random() * 10 + 5 + 'px';
+      particle.style.background = `hsl(${Math.random() * 360}, 70%, 70%)`;
+      document.body.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 6000);
+    }
+
+    // Create falling hearts
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = ['💖', '💝', '💗', '💓', '💕'][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + '%';
+      heart.style.animationDelay = Math.random() * 2 + 's';
+      heart.style.fontSize = Math.random() * 20 + 15 + 'px';
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 4000);
+    }
+
+    // Start particle and heart effects (optimized timing)
+    setInterval(createParticle, 500);
+    setInterval(createHeart, 1200);
+
+    // Music controls
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const volumeBtn = document.getElementById('volumeBtn');
+    let isPlaying = false;
+    let isMuted = false;
+
+    playPauseBtn.addEventListener('click', () => {
+      if (isPlaying) {
+        audio.pause();
+        playPauseBtn.innerHTML = '🎵';
+      } else {
+        audio.play();
+        playPauseBtn.innerHTML = '⏸️';
+      }
+      isPlaying = !isPlaying;
+      playPauseBtn.classList.add('shake');
+      setTimeout(() => playPauseBtn.classList.remove('shake'), 500);
+    });
+
+    volumeBtn.addEventListener('click', () => {
+      if (isMuted) {
+        audio.muted = false;
+        volumeBtn.innerHTML = '🔊';
+      } else {
+        audio.muted = true;
+        volumeBtn.innerHTML = '🔇';
+      }
+      isMuted = !isMuted;
+      volumeBtn.classList.add('shake');
+      setTimeout(() => volumeBtn.classList.remove('shake'), 500);
+    });
+
+    // Surprise popup with countdown
+    function showSurprisePopup() {
+      const popup = document.getElementById('surprisePopup');
+      const countdown = document.getElementById('countdown');
+      let count = 3;
+
+      popup.classList.add('show');
+
+      const countdownInterval = setInterval(() => {
+        count--;
+        countdown.textContent = count;
+
+        if (count === 0) {
+          clearInterval(countdownInterval);
+          countdown.textContent = '🎉';
+
+          // Trigger confetti
+          confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+          });
+
+          setTimeout(() => {
+            popup.classList.remove('show');
+          }, 2000);
+        }
+      }, 1000);
+    }
+
+    // Random surprise events (optimized)
+    function triggerRandomSurprise() {
+      const surprises = [
+        () => {
+          // Gentle screen pulse
+          document.body.style.animation = 'pulse 0.6s ease-in-out';
+          setTimeout(() => document.body.style.animation = '', 600);
+        },
+        () => {
+          // Subtle background glow
+          document.body.style.boxShadow = 'inset 0 0 100px rgba(255, 105, 180, 0.3)';
+          setTimeout(() => document.body.style.boxShadow = '', 2000);
+        },
+        () => {
+          // Floating emoji (reduced quantity for performance)
+          for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+              const emoji = document.createElement('div');
+              emoji.innerHTML = ['🌟', '✨', '💫', '⭐', '🌈', '🦄', '🎀', '🌸'][i];
+              emoji.style.position = 'fixed';
+              emoji.style.left = Math.random() * 100 + '%';
+              emoji.style.top = Math.random() * 100 + '%';
+              emoji.style.fontSize = '25px';
+              emoji.style.zIndex = '1000';
+              emoji.style.pointerEvents = 'none';
+              emoji.style.animation = 'floating 1.5s ease-in-out';
+              emoji.style.opacity = '0.8';
+              document.body.appendChild(emoji);
+
+              setTimeout(() => emoji.remove(), 1500);
+            }, i * 80);
+          }
+        },
+        showSurprisePopup
+      ];
+
+      const randomSurprise = surprises[Math.floor(Math.random() * surprises.length)];
+      randomSurprise();
+    }
+
+    // Trigger surprise every 20-40 seconds (less frequent to avoid lag)
+    setInterval(() => {
+      setTimeout(triggerRandomSurprise, Math.random() * 20000 + 20000);
+    }, 25000);
+
+    const body = document.querySelector("body"); const swalst = Swal.mixin({ timer: 2300, allowOutsideClick: false, showConfirmButton: false, timerProgressBar: true, imageHeight: 90, }); audio = new Audio('' + linkmp3.src); ftganti = 0; fungsi = 0; fungsiAwal = 0; deffotostiker = '🍑'; Content.style = "opacity:1;margin-top:16vh"; const swals = Swal.mixin({ allowOutsideClick: false, cancelButtonColor: '#FF0040', imageHeight: 80, });
+
+    // Auto play music when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      // Try to play audio automatically
+      audio.play().then(() => {
+        isPlaying = true;
+        playPauseBtn.innerHTML = '⏸️';
+      }).catch(() => {
+        // If autoplay fails due to browser policy, show a gentle prompt
+        setTimeout(() => {
+          const autoplayPrompt = document.createElement('div');
+          autoplayPrompt.innerHTML = '🎵 Click để bật nhạc nền! 🎵';
+          autoplayPrompt.style.position = 'fixed';
+          autoplayPrompt.style.top = '20px';
+          autoplayPrompt.style.left = '50%';
+          autoplayPrompt.style.transform = 'translateX(-50%)';
+          autoplayPrompt.style.background = 'rgba(255, 105, 180, 0.9)';
+          autoplayPrompt.style.color = 'white';
+          autoplayPrompt.style.padding = '10px 20px';
+          autoplayPrompt.style.borderRadius = '25px';
+          autoplayPrompt.style.zIndex = '10000';
+          autoplayPrompt.style.cursor = 'pointer';
+          autoplayPrompt.style.animation = 'pulse 2s infinite';
+          autoplayPrompt.style.fontSize = '16px';
+          autoplayPrompt.style.fontWeight = 'bold';
+          autoplayPrompt.style.boxShadow = '0 4px 15px rgba(255, 105, 180, 0.4)';
+
+          autoplayPrompt.onclick = () => {
+            audio.play();
+            isPlaying = true;
+            playPauseBtn.innerHTML = '⏸️';
+            autoplayPrompt.style.animation = 'fadeOut 0.5s forwards';
+            setTimeout(() => autoplayPrompt.remove(), 500);
+          };
+
+          document.body.appendChild(autoplayPrompt);
+
+          // Auto remove after 10 seconds
+          setTimeout(() => {
+            if (document.body.contains(autoplayPrompt)) {
+              autoplayPrompt.style.animation = 'fadeOut 0.5s forwards';
+              setTimeout(() => autoplayPrompt.remove(), 500);
+            }
+          }, 10000);
+        }, 1000);
+      });
+    });
+
+    document.getElementById("kadoIn").onclick = function () {
+      if (fungsiAwal == 0) {
+        // Trigger confetti when opening gift
+        confetti({
+          particleCount: 150,
+          spread: 100,
+          origin: { y: 0.7 },
+          colors: ['#ff69b4', '#ff1493', '#ffc0cb', '#ffb6c1']
+        });
+
+        // Ensure music is playing (in case autoplay failed)
+        if (!isPlaying) {
+          audio.play();
+          isPlaying = true;
+          playPauseBtn.innerHTML = '⏸️';
+        }
+        fungsiAwal = 1;
+        kadoIn.style = "transition:all .8s ease;transform:scale(10);opacity:0";
+        wallpaper.style = "transform: scale(1.5);";
+        ket.style = "display:none";
+        setTimeout(initengahan, 300);
+        setTimeout(inipesan, 500);
+
+        // Add more hearts when gift is opened
+        for (let i = 0; i < 20; i++) {
+          setTimeout(createHeart, i * 100);
+        }
+      }
+    }
 
     async function inipesan() {
       var { value: nama } = await swals.fire({
-        title: 'Nhập tên ins đi?',
+        title: 'Nhập tên ẻm đi?',
         input: 'text',
       });
 
       if (nama) {
         var temp = nama.toLowerCase();
 
-        if (temp === 'jup.chup') {
+        if (temp === 'Huyền Mi'.toLowerCase() || temp === 'Huyen Mi'.toLowerCase() || temp === 'Mi'.toLowerCase() || temp === "Văn Thị Huyền Mi".toLowerCase()) {
           window.nama = nama;
-          vketikhalo = "Hi, " + "Minh Linh";
+          vketikhalo = "Hi, " + "Huyền Mi";
           mulainama();
         } else {
-          await swals.fire('Không phải tên ins này rồi!');
+          await swals.fire('Không phải tên này rồi!');
           inipesan();
         }
       } else {
@@ -114,42 +635,157 @@
     }
 
 
-    var tanya = 'có rảnh không mình đi trà chanh chém gió đii 😳';
+    var tanya = 'Chủ nhật em có rảnh không ? Ảnh muốn ẻm đi mua đồ với ảnh 😳';
     var opstanya = 'Lựa chọn của em là...';
     var tompositif = 'Em đồng ý';
     var tomnegatif = 'Em không chịu';
 
     async function pertanyaan() {
+      // Add surprise before question
+      triggerRandomSurprise();
+
       var { isConfirmed: prtanya } = await swals.fire({
         title: nama + ' ' + tanya,
-        text: '' + opstanya,
-        imageUrl: './' + fotostiker5.src,
+        text: '🐻 ' + opstanya + ' 💕',
         showCancelButton: true,
         confirmButtonText: '' + tompositif,
         cancelButtonText: '' + tomnegatif,
+        background: 'linear-gradient(45deg, #ff69b4, #ff1493)',
+        color: 'white',
+        showClass: {
+          popup: 'animate__animated animate__bounceIn'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOut'
+        }
       });
 
       if (prtanya) {
-        // Nếu chọn "tompositif"
+        // Trigger massive confetti celebration
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => {
+            confetti({
+              particleCount: 100,
+              spread: 160,
+              origin: { y: 0.3 + (i * 0.1) },
+              colors: ['#ff69b4', '#ff1493', '#ffc0cb', '#ffb6c1', '#dda0dd']
+            });
+          }, i * 200);
+        }
+
         await swalst.fire({
-          title: 'êhehee',
-          imageUrl: './ble_ble.png',
+          title: 'êhehee 😘',
+          text: '🎉 Yêyyy! 🎉',
           timer: 2000,
           showConfirmButton: false,
+          background: 'linear-gradient(45deg, #32cd32, #98fb98)',
+          color: 'white'
         });
         menuju();
       } else {
-        // Nếu chọn "tomnegatif"
+        // Show pouting/sulking sticker first
+        const poutSticker = document.createElement('div');
+        poutSticker.innerHTML = '😤';
+        poutSticker.style.position = 'fixed';
+        poutSticker.style.top = '30%';
+        poutSticker.style.left = '50%';
+        poutSticker.style.transform = 'translate(-50%, -50%) scale(0)';
+        poutSticker.style.fontSize = '80px';
+        poutSticker.style.zIndex = '9999';
+        poutSticker.style.transition = 'transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55)';
+        poutSticker.style.filter = 'drop-shadow(0 10px 20px rgba(0,0,0,0.3))';
+        document.body.appendChild(poutSticker);
+
+        // Animate the pouting sticker
+        setTimeout(() => {
+          poutSticker.style.transform = 'translate(-50%, -50%) scale(1)';
+        }, 100);
+
+        // Add floating sad emojis
+        for (let i = 0; i < 5; i++) {
+          setTimeout(() => {
+            const sadEmoji = document.createElement('div');
+            sadEmoji.innerHTML = ['😞', '😢', '😟', '😕', '🥺'][i];
+            sadEmoji.style.position = 'fixed';
+            sadEmoji.style.left = Math.random() * 80 + 10 + '%';
+            sadEmoji.style.top = Math.random() * 60 + 20 + '%';
+            sadEmoji.style.fontSize = '30px';
+            sadEmoji.style.zIndex = '1000';
+            sadEmoji.style.pointerEvents = 'none';
+            sadEmoji.style.animation = 'floating 2s ease-in-out';
+            sadEmoji.style.opacity = '0.7';
+            document.body.appendChild(sadEmoji);
+
+            setTimeout(() => sadEmoji.remove(), 2000);
+          }, i * 200);
+        }
+
+        // Create tear rain effect
+        for (let i = 0; i < 15; i++) {
+          setTimeout(() => {
+            const tear = document.createElement('div');
+            tear.innerHTML = '💧';
+            tear.style.position = 'fixed';
+            tear.style.left = Math.random() * 100 + '%';
+            tear.style.top = '-50px';
+            tear.style.fontSize = Math.random() * 15 + 10 + 'px';
+            tear.style.zIndex = '999';
+            tear.style.pointerEvents = 'none';
+            tear.style.animation = 'fall 3s linear forwards';
+            document.body.appendChild(tear);
+
+            setTimeout(() => tear.remove(), 3000);
+          }, i * 100);
+        }
+
+        // Background color change to show sadness
+        document.body.style.background = 'linear-gradient(45deg, #4a4a4a, #2d2d2d)';
+        setTimeout(() => {
+          document.body.style.background = '';
+        }, 2000);
+
+        // Remove pouting sticker after showing
+        setTimeout(() => {
+          poutSticker.style.transform = 'translate(-50%, -50%) scale(0)';
+          setTimeout(() => poutSticker.remove(), 500);
+        }, 1500);
+
+        // Increment rejection counter
+        rejectionCount++;
+
+        // Cycling rejection messages
+        const rejectionMessages = [
+          '😢 Ai cho chọn cái này! Cho chọn lại đó',
+          '🙄 Vẫn lì hả, cho chọn lại lần nữa',
+          '😤 Thôi mà, sao cứ từ chối hoài vậy?',
+          '🥺 Làm ơn đi, chọn cái kia đi mà!',
+          '😭 Anh sắp khóc rồi đấy, chọn lại đi!'
+        ];
+
+        // Get message based on rejection count (cycle after 5th rejection)
+        const messageIndex = (rejectionCount - 1) % rejectionMessages.length;
+        const currentMessage = rejectionMessages[messageIndex];
+
+        // Smooth rejection effect with cycling message
         await swalst.fire({
-          title: 'Hmmm...',
-          imageUrl: './hmm.png',
-          timer: 2000,
+          title: 'Hmmm... 🤔',
+          text: currentMessage,
+          timer: 1800,
           showConfirmButton: false,
+          background: 'linear-gradient(45deg, #ff6347, #ffa07a)',
+          color: 'white',
+          showClass: {
+            popup: 'animate__animated animate__headShake'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOut'
+          }
         });
-        pertanyaan(); // Gọi lại hàm để chọn lại
+        pertanyaan();
       }
     }
   </script>
+  <script src="enhanced-effects.js"></script>
   <script src="a.js"></script>
 
 </body>
